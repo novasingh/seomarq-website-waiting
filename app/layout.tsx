@@ -36,7 +36,12 @@ export const metadata: Metadata = {
   creator: 'SEOMARQ',
   publisher: 'SEOMARQ',
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/logo.svg', sizes: 'any', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/logo.svg',
   },
   alternates: {
     canonical: '/',
