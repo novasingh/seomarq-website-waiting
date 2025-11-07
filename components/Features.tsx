@@ -18,7 +18,7 @@ const features = [
   },
 ];
 
-export const Features: React.FC = () => {
+export function Features() {
   return (
     <section id="features" className="py-20 lg:py-32" aria-labelledby="features-heading">
       <div className="text-center">
@@ -45,4 +45,4 @@ export const Features: React.FC = () => {
       </div>
     </section>
   );
-};
+}

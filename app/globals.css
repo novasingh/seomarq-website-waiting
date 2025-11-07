@@ -2,43 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #110c1f;
+  }
 }
 
-body {
-  background-color: #110c1f;
-}
-@keyframes fade-in-up {
-  from {
+@layer components {
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  .will-animate {
     opacity: 0;
-    transform: translateY(1rem);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
-}
-@keyframes blink {
-  50% {
-    opacity: 0;
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
   }
-}
-.cursor-blink {
-  animation: blink 1s step-end infinite;
-}
-.will-animate {
-  opacity: 0;
-}
-.animate-fade-in-up {
-  animation: fade-in-up 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-.animation-delay-200 {
-  animation-delay: 200ms;
-}
-.animation-delay-400 {
-  animation-delay: 400ms;
-}
-.animation-delay-600 {
-  animation-delay: 600ms;
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
 }

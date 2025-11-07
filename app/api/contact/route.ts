@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
+export const revalidate = 3600; // Cache for 1 hour
 
 // Lightweight validation
 function validateContactForm(data: any): { valid: boolean; error?: string } {

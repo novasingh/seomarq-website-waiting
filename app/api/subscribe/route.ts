@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
+export const revalidate = 3600; // Cache for 1 hour
 
 // Lightweight email validation
 function validateEmail(email: any): boolean {

@@ -141,6 +141,28 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        {/* DNS Prefetch for external services */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_SUPABASE_URL || ''} />
+        
+        {/* Preconnect to Supabase for faster API calls */}
+        {process.env.NEXT_PUBLIC_SUPABASE_URL && (
+          <link rel="preconnect" href={process.env.NEXT_PUBLIC_SUPABASE_URL} crossOrigin="anonymous" />
+        )}
+        
+        {/* Inline critical CSS to prevent render-blocking */}
+        <style>{`
+          html { scroll-behavior: smooth; }
+          body { background-color: #110c1f; margin: 0; padding: 0; font-family: ${inter.variable}; }
+          @keyframes fade-in-up { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: translateY(0); } }
+          @keyframes blink { 50% { opacity: 0; } }
+          .cursor-blink { animation: blink 1s step-end infinite; }
+          .will-animate { opacity: 0; }
+          .animate-fade-in-up { animation: fade-in-up 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+          .animation-delay-200 { animation-delay: 200ms; }
+          .animation-delay-400 { animation-delay: 400ms; }
+          .animation-delay-600 { animation-delay: 600ms; }
+        `}</style>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

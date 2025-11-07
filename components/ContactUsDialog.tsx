@@ -8,7 +8,7 @@ interface ContactUsDialogProps {
   onClose: () => void;
 }
 
-export const ContactUsDialog: React.FC<ContactUsDialogProps> = ({ isOpen, onClose }) => {
+export default function ContactUsDialog({ isOpen, onClose }: ContactUsDialogProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -187,6 +187,4 @@ export const ContactUsDialog: React.FC<ContactUsDialogProps> = ({ isOpen, onClos
       </div>
     </div>
   );
-};
-
-export default ContactUsDialog;
+}
