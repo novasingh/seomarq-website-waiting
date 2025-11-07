@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, FormEvent } from 'react';
+import { useState, useEffect, useMemo, FormEvent } from 'react';
 import { MailIcon } from './Icons';
 
-export const Hero: React.FC = () => {
+export const Hero = () => {
   // Typing animation state
   const [wordIndex, setWordIndex] = useState(0);
   const [text, setText] = useState('');

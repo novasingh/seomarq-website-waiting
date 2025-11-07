@@ -1,26 +1,25 @@
 import { NextResponse } from 'next/server';
-import { z } from 'zod';
 
 export const runtime = 'edge';
 
-const SubscribeSchema = z.object({
-  email: z.string().email(),
-});
+// Lightweight email validation
+function validateEmail(email: any): boolean {
+  return typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
 // Calls Supabase Edge Function securely from server-side
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const parsed = SubscribeSchema.safeParse(body);
 
-    if (!parsed.success) {
+    if (!validateEmail(body.email)) {
       return NextResponse.json(
-        { error: 'Validation failed', details: parsed.error.flatten() },
+        { error: 'Invalid email address' },
         { status: 400 }
       );
     }
 
-    const { email } = parsed.data;
+    const { email } = body;
 
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;

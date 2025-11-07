@@ -1,6 +1,4 @@
-import React from 'react';
-
-export const LogoIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const LogoIcon = ({ className }: { className?: string }) => (
   <svg
     className={className}
     viewBox="0 0 30 30"
@@ -27,7 +25,7 @@ export const LogoIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-export const MailIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const MailIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className={className}
@@ -44,19 +42,19 @@ export const MailIcon: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 
-export const AnalysisIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const AnalysisIcon = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
 );
 
-export const SuggestionsIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const SuggestionsIcon = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18h6v-2.25L12 13l-3 2.75V18z"></path><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 5h10s2-2 2-5a7 7 0 0 0-7-7z"></path></svg>
 );
 
-export const TrackingIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const TrackingIcon = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
 );
 
-export const CloseIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const CloseIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
   </svg>

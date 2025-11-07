@@ -1,27 +1,35 @@
 import { NextResponse } from 'next/server';
-import { z } from 'zod';
 
 export const runtime = 'edge';
 
-const ContactSchema = z.object({
-  name: z.string().min(2).max(200),
-  email: z.string().email(),
-  message: z.string().min(5).max(5000),
-});
+// Lightweight validation
+function validateContactForm(data: any): { valid: boolean; error?: string } {
+  if (!data.name || typeof data.name !== 'string' || data.name.length < 2 || data.name.length > 200) {
+    return { valid: false, error: 'Name must be between 2-200 characters' };
+  }
+  if (!data.email || typeof data.email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    return { valid: false, error: 'Invalid email address' };
+  }
+  if (!data.message || typeof data.message !== 'string' || data.message.length < 5 || data.message.length > 5000) {
+    return { valid: false, error: 'Message must be between 5-5000 characters' };
+  }
+  return { valid: true };
+}
 
 // Calls Supabase Edge Function securely from server-side
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const parsed = ContactSchema.safeParse(body);
-    if (!parsed.success) {
+    const validation = validateContactForm(body);
+    
+    if (!validation.valid) {
       return NextResponse.json(
-        { error: 'Validation failed', details: parsed.error.flatten() },
+        { error: validation.error },
         { status: 400 }
       );
     }
 
-    const { name, email, message } = parsed.data;
+    const { name, email, message } = body;
 
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/next";
 import './globals.css';
@@ -7,7 +7,15 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
+
+export const viewport: Viewport = {
+  themeColor: '#0f0a1d',
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://seomarq.com'),
@@ -90,7 +98,6 @@ export const metadata: Metadata = {
     // google: 'your-google-verification-code',
     // yandex: 'your-yandex-verification-code',
   },
-  themeColor: '#0f0a1d',
 };
 
 export default function RootLayout({
@@ -145,7 +152,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className} suppressHydrationWarning>
         {children}
-        <Analytics />
+        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   );

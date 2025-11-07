@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -7,7 +8,7 @@ interface HeaderProps {
   onContactClick: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onContactClick }) => {
+export const Header = ({ onContactClick }: HeaderProps) => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);

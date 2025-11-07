@@ -2,16 +2,30 @@
 const nextConfig = {
   reactStrictMode: true,
   
-  // Image optimization
+  // Optimize for production
+  poweredByHeader: false,
+  generateEtags: false,
+  compress: true,
+  
+  // Image optimization - reduced for single page
   images: {
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    formats: ['image/webp'],
+    deviceSizes: [640, 1080, 1920],
+    imageSizes: [32, 48, 96],
+    minimumCacheTTL: 31536000,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'inline',
   },
 
   // Compiler options
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+  },
+  
+  // Experimental features for faster builds
+  experimental: {
+    optimizePackageImports: ['@vercel/analytics'],
+    optimizeCss: true,
   },
 
   // Environment variables (if needed)
@@ -40,6 +54,10 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

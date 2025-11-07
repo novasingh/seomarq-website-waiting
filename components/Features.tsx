@@ -1,4 +1,3 @@
-import React from 'react';
 import { AnalysisIcon, SuggestionsIcon, TrackingIcon } from './Icons';
 
 const features = [
