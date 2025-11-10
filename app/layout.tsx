@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/next";
 import './globals.css';
@@ -9,6 +10,7 @@ const inter = Inter({
   variable: '--font-inter',
   preload: true,
   fallback: ['system-ui', 'arial'],
+  weight: ['400', '700', '900'],
 });
 
 export const viewport: Viewport = {
@@ -144,11 +146,55 @@ export default function RootLayout({
         {/* DNS Prefetch for external services */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_SUPABASE_URL || ''} />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         
         {/* Preconnect to Supabase for faster API calls */}
         {process.env.NEXT_PUBLIC_SUPABASE_URL && (
           <link rel="preconnect" href={process.env.NEXT_PUBLIC_SUPABASE_URL} crossOrigin="anonymous" />
         )}
+        
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3BZTXC9');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
+        
+        {/* Google Analytics - Load asynchronously to avoid render-blocking */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17683119225"
+          strategy="afterInteractive"
+          async
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-17683119225');
+            `,
+          }}
+        />
+        
+        {/* Defer JSON-LD scripts to prevent render-blocking */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          suppressHydrationWarning
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }}
+          suppressHydrationWarning
+        />
         
         {/* Inline critical CSS to prevent render-blocking */}
         <style>{`
@@ -163,16 +209,19 @@ export default function RootLayout({
           .animation-delay-400 { animation-delay: 400ms; }
           .animation-delay-600 { animation-delay: 600ms; }
         `}</style>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }}
-        />
       </head>
       <body className={inter.className} suppressHydrationWarning>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-M3BZTXC9"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
+        
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

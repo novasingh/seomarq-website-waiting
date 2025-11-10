@@ -116,8 +116,10 @@ export const Hero = () => {
             <>
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                 <div className="relative flex-grow">
-                   <MailIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                   <label htmlFor="hero-email" className="sr-only">Email for early access</label>
+                   <MailIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" aria-hidden="true" />
                    <input
+                    id="hero-email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
