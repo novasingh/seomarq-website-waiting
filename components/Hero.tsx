@@ -97,7 +97,7 @@ export const Hero = () => {
   return (
     <section className="py-20 lg:py-24" aria-labelledby="hero-heading">
       <div className="text-center">
-        <h1 id="hero-heading" className="text-5xl md:text-6xl font-black text-white leading-tight tracking-tighter h-36 md:h-24 flex flex-wrap items-center justify-center">
+        <h1 id="hero-heading" className="text-5xl md:text-6xl font-black text-white leading-tight tracking-tighter h-38 md:h-24 flex flex-wrap items-center justify-center">
           <span className="mr-3">Analyze & Optimize Your</span>
           <span className="text-purple-400 whitespace-nowrap" aria-live="polite" aria-atomic="true">
             {text}
