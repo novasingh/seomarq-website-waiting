@@ -77,16 +77,6 @@ const nextConfig = {
           },
         ],
       },
-      // CSS/JS chunks - cache for 1 year (with fingerprint in filename)
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
       // Images - cache for 1 year
       {
         source: '/images/:path*',
