@@ -78,6 +78,11 @@ export const Hero = () => {
         throw new Error(msg || `Server responded with status: ${response.status}`);
       }
 
+      // Track conversion for Google Ads
+      if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+        (window as any).gtag_report_conversion();
+      }
+
       setSubmitted(true);
       setEmail('');
     } catch (err: any) {
