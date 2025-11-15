@@ -43,7 +43,9 @@ const nextConfig = {
         headers: [
           {
             key: 'Link',
-            value: '</api/subscribe>; rel=preconnect, </api/contact>; rel=preconnect, </_next/static/:path*>; rel=prefetch',
+            // Only include valid preconnect targets here. Avoid wildcard prefetch patterns which
+            // can be interpreted literally by the browser (causing requests to '/_next/static/:path*').
+            value: '</api/subscribe>; rel=preconnect, </api/contact>; rel=preconnect, https://fonts.gstatic.com; rel=preconnect',
           },
           {
             key: 'X-DNS-Prefetch-Control',

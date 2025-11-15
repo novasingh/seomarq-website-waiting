@@ -126,7 +126,15 @@ export default function ContactUsDialog({ isOpen, onClose }: ContactUsDialogProp
               <p className="mt-2 text-sm text-gray-400">
                 Have a question or want to learn more? Drop us a line!
               </p>
-              <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
+              <form 
+                id="contact-form"
+                name="contact"
+                onSubmit={handleSubmit} 
+                className="mt-6 space-y-4" 
+                action="/api/contact"
+                method="POST"
+                noValidate
+              >
                 <div>
                   <label htmlFor="name" className="sr-only">Name</label>
                   <input
